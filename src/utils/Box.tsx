@@ -5,6 +5,7 @@ import {
   layout,
   flexbox,
   border,
+  grid,
   LayoutProps,
   PositionProps,
   FlexboxProps,
@@ -49,7 +50,8 @@ const Box = styled.div<BoxProps>(
   flexbox,
   typography,
   border,
-  shadow
+  shadow,
+  grid
 );
 
 export default Box;

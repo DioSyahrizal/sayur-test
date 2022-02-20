@@ -5,7 +5,7 @@ import { Box } from "../utils";
 
 const Header = () => {
   return (
-    <Box as="header">
+    <Head as="header">
       <Ul>
         <Li>
           <Link to="/">Movies</Link>
@@ -14,13 +14,19 @@ const Header = () => {
           <Link to="/peoples">Peoples</Link>
         </Li>
       </Ul>
-    </Box>
+    </Head>
   );
 };
+
+const Head = styled(Box)`
+  margin: 0;
+  border-bottom: 0.5px solid #cbd5e1;
+`;
 
 const Ul = styled("ul")`
   list-style-type: none;
   display: flex;
+  margin: 20px 0;
 `;
 
 const Li = styled("li")`
