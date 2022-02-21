@@ -1,1 +1,3 @@
-export { default as Peoples } from "./Peoples";
+import Peoples from "./Peoples";
+
+export default Peoples;
