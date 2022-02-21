@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import colors from "../common/colors";
 import { Box } from "../utils";
 
 const Header = () => {
@@ -12,6 +13,9 @@ const Header = () => {
         </Li>
         <Li>
           <Link to="/peoples">Peoples</Link>
+        </Li>
+        <Li>
+          <Link to="/planets">Planets</Link>
         </Li>
       </Ul>
     </Head>
@@ -35,12 +39,9 @@ const Li = styled("li")`
 
 const Link = styled(NavLink)`
   text-decoration: none;
-  &.active {
-    color: green;
-  }
-
+  &.active,
   &:hover {
-    color: greenyellow;
+    color: ${colors.greenDark};
   }
 `;
 

@@ -1,41 +1,50 @@
-import { useQuery } from "@apollo/client";
 import React, { FC } from "react";
-import GET_FILMS from "../../hooks/films/useFilms";
+import { useQuery } from "@apollo/client";
+import { useNavigate } from "react-router";
+
+import { Badge, GridLayout, Loading, SectionBox } from "../../components";
+import GET_FILMS from "../../hooks/query/useFilms";
 import { Box } from "../../utils";
+import { GetFilms } from "../../hooks/query/__generated__/GetFilms";
 
 const Dashboard: FC = () => {
-  const { data, loading } = useQuery(GET_FILMS);
-
-  console.log(data);
+  const { data, loading } = useQuery<GetFilms>(GET_FILMS);
+  const navigate = useNavigate();
 
   if (loading) {
-    return <>Loading...</>;
+    return <Loading />;
   }
 
   return (
     <Box px={["25px", "100px"]}>
-      <Box as="h1">Dashboard</Box>
-      <Box
-        display="grid"
-        gridTemplateColumns={["1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr 1fr 1fr"]}
-        gridGap={20}
-      >
-        {data?.allFilms.films.map((film: any) => (
-          <Box key={film.id} border="1px solid black" borderRadius={15} p={20}>
-            <Box as="h2" mt={0}>
-              {film.title}
+      <Box as="h1">Films</Box>
+      <GridLayout>
+        {data?.allFilms?.films?.map((film) => (
+          <SectionBox
+            key={film?.id}
+            onClick={() => navigate(`film/${film?.id}`)}
+          >
+            <Box as="h2" my={0}>
+              {film?.title}
             </Box>
-            <Box mb={10}>Director: {film.director}</Box>
-            <Box mb={10}>Release date: {film.releaseDate}</Box>
-            <Box>
-              Producers:
-              {film.producers.map((producer: any) => (
-                <div>{producer}</div>
+            <Box my={10}>
+              <Badge variant="red">Episode: {film?.episodeID}</Badge>
+            </Box>
+            <Box>Director: {film?.director}</Box>
+            <Box my={10}>Release date: {film?.releaseDate}</Box>
+            <Box as="ul" mt={20} p={0}>
+              <Box fontWeight="bold" mb={10}>
+                Producers:
+              </Box>
+              {film?.producers?.map((producer, idx) => (
+                <Badge key={idx} variant="green" display="inline-block" mr={10}>
+                  {producer}
+                </Badge>
               ))}
             </Box>
-          </Box>
+          </SectionBox>
         ))}
-      </Box>
+      </GridLayout>
     </Box>
   );
 };

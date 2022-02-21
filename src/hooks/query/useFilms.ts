@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 const GET_FILMS = gql`
-  query GetFils {
+  query GetFilms {
     allFilms {
       totalCount
       films {
@@ -16,13 +16,5 @@ const GET_FILMS = gql`
     }
   }
 `;
-
-export interface Films {
-  allFilms: Film[];
-}
-
-interface Film {
-  totalCount: number;
-}
 
 export default GET_FILMS;
